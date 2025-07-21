@@ -1,12 +1,39 @@
-{# {% extends 'base.html.twig' %} #}
-<div class="container">
-    <div class="row">
-        <h1 class="mt-5 mb-5">Create Form</h1> 
-        <div class="col-md-6 offset-md-3">
-            {{ form_start(form) }}
-            {{ form(form) }}
-            {{ form_end(form) }}
-            <button type="submit" class="btn btn-primary">Submit</button>
+{% extends 'base.html.twig' %}
+
+{# {% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="mt-5 mb-5">Create Form</h1> 
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                {{ form(form) }}
+                {{ form_end(form) }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
-    </div>
-<div>
+    <div>
+{% endblock %} #}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="mt-5 mb-5">Create Form</h1> 
+            {# affichage du formualire #}
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title, { 'attr': {'class':'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.content) }}
+                        {{ form_widget(form.content, { 'attr': {'class':'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-dark mt-2 text-white">Submit</button>
+                    </div>
+                {{ form_end(form) }}   
+            </div>
+        </div>
+    <div>      
+{% endblock %}
