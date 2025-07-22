@@ -50,7 +50,7 @@ final class HomePageController extends AbstractController
         ]);
     }
 
-    // route de la modification du data qui s'affiche dans le homepage en prenant son id--------------- UPDATE
+    // route de la modification du data qui s'affiche dans le homepage en prenant son id --------------- UPDATE
     #[Route('/update/{id}', name: 'app_home_page_updateData')] // wildcard {id}
     public function update_form($id, Request $request, EntityManagerInterface $entityManager): Response //rappeler l'id
     {
@@ -73,23 +73,15 @@ final class HomePageController extends AbstractController
 
     // route de la suppression du data qui s'affiche dans le homepage --------------- DELETE
     #[Route('/delete/{id}', name: 'app_home_page_deleteData')] 
-    public function delete_form($id, Request $request, EntityManagerInterface $entityManager): Response 
+    public function delete_form($id, EntityManagerInterface $entityManager): Response 
     {
         $crud = $entityManager->getRepository(Crud::class)->find($id);
-        $form = $this->createForm(CrudType::class, $crud); 
-        $form->handleRequest($request);
-        if  ( $form->isSubmitted() && $form->isValid()){ 
-            $entityManager->persist($crud);
-            $entityManager->flush(); 
+        $entityManager->remove($crud); 
+        $entityManager->flush(); 
 
-            $this->addFlash('notice', 'Suppression réussie !');
+        $this->addFlash('notice', 'Suppression réussie !');
 
-            return $this->redirectToRoute('app_home_page'); 
-        }
-
-        return $this->render('form/deleteForm.html.twig', [ 
-            'form' => $form->createView()
-        ]);
+        return $this->redirectToRoute('app_home_page'); 
     }
 
 }
