@@ -51,8 +51,8 @@ final class HomePageController extends AbstractController
     }
 
     // route de la modification du data qui s'affiche dans le homepage en prenant son id --------------- UPDATE
-    #[Route('/update/{id}', name: 'app_home_page_updateData')] // wildcard {id}
-    public function update_form($id, Request $request, EntityManagerInterface $entityManager): Response //rappeler l'id
+    #[Route('/update/{id}', name: 'app_home_page_updateData')] // wildcard/joker {id}
+    public function update_form($id, Request $request, EntityManagerInterface $entityManager): Response //rappeler l'id / EntityManagerInterface = Doctrine = ORM Object Relation Mapping
     {
         $crud = $entityManager->getRepository(Crud::class)->find($id);
         $form = $this->createForm(CrudType::class, $crud); 

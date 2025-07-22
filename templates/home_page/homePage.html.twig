@@ -17,12 +17,12 @@
 </style>
 
 {# tableau qui montre les données qu'on a recu  #}
-<table class="table table-dark table-striped mt-5">
+<table class="table table-dark table-striped d-flex p-5 flex-column ">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">content</th>
+            <th scope="col">Content</th>
         </tr>    
     </thead>
     <tbody>
@@ -32,13 +32,11 @@
             <td>{{data.title}}</td>
             <td>{{data.content}}</td>
             <td>
-                <a href="{{ path('app_home_page_updateData',{'id': data.id}) }}" class="btn btn-warning">Modifier</a>
-                <a href="{{ path('app_home_page_deleteData',{'id': data.id}) }}" class="btn btn-danger">Supprimer</a>
+                <a href="{{ path('app_home_page_updateData',{'id': data.id}) }}" class="btn btn-warning">Modify</a>
+                <a href="{{ path('app_home_page_deleteData',{'id': data.id}) }}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     {% endfor %}
-        
-
     </tbody>
 </table>
 {% endblock %}
