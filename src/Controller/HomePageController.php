@@ -29,6 +29,7 @@ final class HomePageController extends AbstractController
         ]);
     }
 
+    // route de l'envoi du formulaire --------------- CREATE
     #[Route('/create', name: 'app_create_form')] 
     public function create_form(Request $request, EntityManagerInterface $entityManager): Response // attention prendre le httpfoundation request //entityManagerinterface maintenant au lieu du getdoctrine et getmanager
     {
@@ -49,8 +50,9 @@ final class HomePageController extends AbstractController
         ]);
     }
 
-    #[Route('/update/{id}', name: 'app_home_page_updateData')] 
-    public function update_form($id, Request $request, EntityManagerInterface $entityManager): Response 
+    // route de la modification du data qui s'affiche dans le homepage en prenant son id--------------- UPDATE
+    #[Route('/update/{id}', name: 'app_home_page_updateData')] // wildcard {id}
+    public function update_form($id, Request $request, EntityManagerInterface $entityManager): Response //rappeler l'id
     {
         $crud = $entityManager->getRepository(Crud::class)->find($id);
         $form = $this->createForm(CrudType::class, $crud); 
@@ -69,6 +71,7 @@ final class HomePageController extends AbstractController
         ]);
     }
 
+    // route de la suppression du data qui s'affiche dans le homepage --------------- DELETE
     #[Route('/delete/{id}', name: 'app_home_page_deleteData')] 
     public function delete_form($id, Request $request, EntityManagerInterface $entityManager): Response 
     {
